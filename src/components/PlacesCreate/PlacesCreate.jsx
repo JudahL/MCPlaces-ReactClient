@@ -1,15 +1,30 @@
 import { useRef } from 'react';
 import { FormInput } from '../Forms/FormInput';
+import { CoordinatesInput } from '../Forms/CoordinatesInput';
+import { addNewPlace } from '../../api/addNewPlace';
+import { buildPlace } from '../../api/placeBuilder';
 
 function PlacesCreate() {
   const nameInputRef = useRef();
   const descriptionInputRef = useRef();
+  const xCoordsInputRef = useRef();
+  const yCoordsInputRef = useRef();
+  const zCoordsInputRef = useRef();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(
-      `Testing: Name-${nameInputRef.current.value}, Description-${descriptionInputRef.current.value}`
+    const place = buildPlace(
+      nameInputRef.current.value,
+      descriptionInputRef.current.value,
+      xCoordsInputRef.current.value,
+      yCoordsInputRef.current.value,
+      zCoordsInputRef.current.value
     );
+    try {
+      await addNewPlace(place);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -25,30 +40,11 @@ function PlacesCreate() {
           <legend className="block mt-6 text-gray-700 font-bold text-2xl">
             Coordinates
           </legend>
-          <label htmlFor="x" className="mt-4 text-gray-700 font-bold text-xl">
-            X:
-          </label>
-          <input
-            className="w-1/4 p-1 mt-2 mr-4 border border-gray-300 text-xl text-emerald-800"
-            type="text"
-            id="x"
-          />
-          <label htmlFor="y" className="mt-4 text-gray-700 font-bold text-xl">
-            Y:
-          </label>
-          <input
-            className="w-1/4 p-1 mt-2 mr-4 border border-gray-300 text-xl text-emerald-800"
-            type="text"
-            id="y"
-          />
-          <label htmlFor="z" className="mt-4 text-gray-700 font-bold text-xl">
-            Z:
-          </label>
-          <input
-            className="w-1/4 p-1 mt-2 border border-gray-300 text-xl text-emerald-800"
-            type="text"
-            id="z"
-          />
+          <div className="flex items-center gap-4">
+            <CoordinatesInput label="X" ref={xCoordsInputRef} />
+            <CoordinatesInput label="Y" ref={yCoordsInputRef} />
+            <CoordinatesInput label="Z" ref={zCoordsInputRef} />
+          </div>
         </fieldset>
         <hr className="h-px mt-8 bg-gray-500 border-0" />
         <button

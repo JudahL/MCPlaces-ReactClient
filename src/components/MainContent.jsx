@@ -7,7 +7,7 @@ function MainContent() {
     <div className="h-full p-2 sm:p-4 md:p-6 lg:p-8">
       <NavBar />
       <div className="max-w-[1440px] mx-auto py-4">
-        <PlacesCreate />
+        <PlacesList />
       </div>
     </div>
   );

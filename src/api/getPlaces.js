@@ -13,4 +13,4 @@ async function getPlaces() {
   return responseData.data;
 }
 
-export {getPlaces};
+export { getPlaces };

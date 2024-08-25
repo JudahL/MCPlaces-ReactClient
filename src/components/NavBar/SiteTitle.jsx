@@ -1,6 +1,6 @@
 import { SiteLogo } from './SiteLogo';
 
-function SiteName() {
+function SiteTitle() {
   return (
     <div className="my-auto flex gap-2">
       <SiteLogo />
@@ -11,4 +11,4 @@ function SiteName() {
   );
 }
 
-export { SiteName };
+export { SiteTitle };

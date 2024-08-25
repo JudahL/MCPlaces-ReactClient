@@ -1,5 +1,5 @@
 import { Navigation } from './Navigation';
-import { SiteTitle } from './SiteTitle';
+import { SiteTitle } from './SiteTitle.jsx';
 
 function NavBar() {
   return (

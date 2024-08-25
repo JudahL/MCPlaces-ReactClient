@@ -1,34 +1,25 @@
+import { useRef } from 'react';
+import { FormInput } from '../Forms/FormInput';
+
 function PlacesCreate() {
+  const nameInputRef = useRef();
+  const descriptionInputRef = useRef();
+
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('Testing: handle submit event.');
+    console.log(
+      `Testing: Name-${nameInputRef.current.value}, Description-${descriptionInputRef.current.value}`
+    );
   }
 
   return (
     <div className="max-w-96 mx-auto">
       <form onSubmit={handleSubmit}>
-        <label
-          htmlFor="name"
-          className="block mt-6 text-gray-700 font-bold text-2xl"
-        >
-          Name
-        </label>
-        <input
-          className="block w-full p-1 mt-2 border border-gray-300 text-xl text-emerald-800"
-          type="text"
-          id="name"
-          required
-        />
-        <label
-          htmlFor="description"
-          className="block mt-6 text-gray-700 font-bold text-2xl"
-        >
-          Description
-        </label>
-        <textarea
-          className="block w-full p-1 mt-2 border border-gray-300 text-md text-emerald-800"
-          type="text"
-          id="description"
+        <FormInput type="input" label="Name" isRequired ref={nameInputRef} />
+        <FormInput
+          type="textarea"
+          label="Description"
+          ref={descriptionInputRef}
         />
         <fieldset>
           <legend className="block mt-6 text-gray-700 font-bold text-2xl">

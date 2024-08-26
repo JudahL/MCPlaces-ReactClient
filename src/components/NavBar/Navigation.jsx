@@ -2,9 +2,10 @@ import { NavigationButton } from './NavigationButton';
 
 function Navigation() {
   return (
-    <div className="my-auto">
-      <NavigationButton title="Places" />
-      <NavigationButton title="Servers" />
+    <div className="my-auto flex justify-end gap-2">
+      <NavigationButton linkTo="places" title="Places" />
+      <NavigationButton linkTo="servers" title="Servers" />
+      <NavigationButton linkTo="create-place" title="Create" />
     </div>
   );
 }

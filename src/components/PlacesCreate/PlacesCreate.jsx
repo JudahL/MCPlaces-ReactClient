@@ -3,6 +3,7 @@ import { FormInput } from '../Forms/FormInput';
 import { CoordinatesInput } from '../Forms/CoordinatesInput';
 import { addNewPlace } from '../../api/addNewPlace';
 import { buildPlace } from '../../api/placeBuilder';
+import { useNavigate } from 'react-router-dom';
 
 function PlacesCreate() {
   const nameInputRef = useRef();
@@ -10,6 +11,8 @@ function PlacesCreate() {
   const xCoordsInputRef = useRef();
   const yCoordsInputRef = useRef();
   const zCoordsInputRef = useRef();
+
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -22,6 +25,7 @@ function PlacesCreate() {
     );
     try {
       await addNewPlace(place);
+      navigate('/places');
     } catch (error) {
       console.log(error);
     }

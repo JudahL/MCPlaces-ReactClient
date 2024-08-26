@@ -1,8 +1,13 @@
-function NavigationButton({ title }) {
+import { Link } from 'react-router-dom';
+
+function NavigationButton({ title, linkTo }) {
   return (
-    <button className="w-24 rounded-lg text-slate-800 font-bold hover:text-emerald-600">
+    <Link
+      to={linkTo}
+      className="w-24 rounded-lg text-lg text-center text-slate-800 font-bold hover:text-emerald-600"
+    >
       {title}
-    </button>
+    </Link>
   );
 }
 

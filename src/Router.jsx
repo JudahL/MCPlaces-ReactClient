@@ -3,6 +3,7 @@ import { PlacesList } from './components/PlacesList/PlacesList';
 import { PlacesCreate } from './components/PlacesCreate/PlacesCreate';
 import { Root } from './components/Root';
 import { ServersList } from './components/ServersList/ServersList';
+import PlaceInfo from './components/PlaceInfo/PlaceInfo';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: 'servers',
         element: <ServersList />,
+      },
+      {
+        path: 'places/:placeId',
+        element: <PlaceInfo />,
       },
     ],
   },

@@ -1,6 +1,14 @@
+import { useNavigate } from 'react-router-dom';
+
 function PlaceCard({ place }) {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate(`/places/${place.id}`);
+  }
+
   return (
-    <div className="p-2 hover:cursor-pointer">
+    <div className="p-2 hover:cursor-pointer" onClick={handleClick}>
       <img
         className="object-cover w-full h-64 sm:h-52 md:h-44 rounded-xl bg-emerald-700 hover:contrast-[0.88] text-center text-gray-100"
         src={place.imageName}

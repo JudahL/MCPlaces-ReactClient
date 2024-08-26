@@ -52,6 +52,7 @@ function PlaceInfo() {
               <p className="text-lg text-gray-600">{`X:${place.coordinates.x}, Y:${place.coordinates.y}, Z:${place.coordinates.z}`}</p>
             </div>
           </div>
+          <hr className="h-px mt-8 bg-gray-500 border-0" />
           <div className="mt-8 flex justify-between gap-8">
             <button
               className="p-2 w-full rounded-lg bg-gray-500 text-gray-50 text-xl hover:bg-gray-400"

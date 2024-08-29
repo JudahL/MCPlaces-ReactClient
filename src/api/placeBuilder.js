@@ -1,7 +1,8 @@
 import defaultImage from '../assets/defaultImage.png';
 
-function buildPlace(name, description, x, y, z) {
+function buildPlace(id, name, description, x, y, z) {
   return {
+    id: id,
     serverId: 1,
     name: name,
     description: description,
@@ -14,6 +15,6 @@ function buildPlace(name, description, x, y, z) {
   }
 }
 
-const emptyPlace = buildPlace('','','','','');
+const emptyPlace = buildPlace(0,'','','','','');
 
 export { buildPlace, emptyPlace };

@@ -5,6 +5,7 @@ import { addNewPlace } from '../../api/addNewPlace';
 import { buildPlace, emptyPlace } from '../../api/placeBuilder';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPlace } from '../../api/getPlace';
+import { editPlace } from '../../api/editPlace';
 
 function PlacesCreate() {
   const navigate = useNavigate();
@@ -41,12 +42,13 @@ function PlacesCreate() {
     xCoordsInputRef.current.value = place.coordinates.x;
     yCoordsInputRef.current.value = place.coordinates.y;
     zCoordsInputRef.current.value = place.coordinates.z;
-    if (place == null) setPlace(null);
+    if (place.name === '') setPlace(null);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const place = buildPlace(
+    const placeToSubmit = buildPlace(
+      place != null ? place.id : 0,
       nameInputRef.current.value,
       descriptionInputRef.current.value,
       xCoordsInputRef.current.value,
@@ -54,7 +56,9 @@ function PlacesCreate() {
       zCoordsInputRef.current.value
     );
     try {
-      await addNewPlace(place);
+      isEditing
+        ? await editPlace(params.placeId, placeToSubmit)
+        : await addNewPlace(placeToSubmit);
       navigate('/places');
     } catch (error) {
       console.log(error);

@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         path: 'places/:placeId',
         element: <PlaceInfo />,
       },
+      {
+        path: 'places/:placeId/edit',
+        element: <PlacesCreate />,
+      },
     ],
   },
 ]);

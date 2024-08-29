@@ -14,4 +14,6 @@ function buildPlace(name, description, x, y, z) {
   }
 }
 
-export { buildPlace };
+const emptyPlace = buildPlace('','','','','');
+
+export { buildPlace, emptyPlace };

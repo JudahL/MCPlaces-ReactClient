@@ -115,14 +115,16 @@ function PlacesCreate() {
       >
         Back
       </button>
-      <hr className="h-px mt-8 bg-gray-500 border-0" />
       {isEditing && (
-        <button
-          className="mt-8 p-2 w-full rounded-lg bg-red-500 text-gray-50 text-xl hover:bg-red-400"
-          onClick={handleDeleteClick}
-        >
-          Delete
-        </button>
+        <>
+          <hr className="h-px mt-8 bg-gray-500 border-0" />
+          <button
+            className="mt-8 p-2 w-full rounded-lg bg-red-500 text-gray-50 text-xl hover:bg-red-400"
+            onClick={handleDeleteClick}
+          >
+            Delete
+          </button>
+        </>
       )}
     </div>
   );

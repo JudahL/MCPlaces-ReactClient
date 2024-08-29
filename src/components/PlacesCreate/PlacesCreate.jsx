@@ -6,6 +6,7 @@ import { buildPlace, emptyPlace } from '../../api/placeBuilder';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';
+import { deletePlace } from '../../api/deletePlace';
 
 function PlacesCreate() {
   const navigate = useNavigate();
@@ -65,6 +66,22 @@ function PlacesCreate() {
     }
   }
 
+  async function handleDeleteClick() {
+    try {
+      if (params.placeId != place.id) {
+        throw new Error('Ids do not match.');
+      }
+      await deletePlace(params.placeId);
+      navigate('/places');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleBackClick() {
+    isEditing ? navigate(`/places/${params.placeId}`) : navigate('/places');
+  }
+
   return (
     <div className="max-w-96 mx-auto">
       <form onSubmit={handleSubmit}>
@@ -92,6 +109,21 @@ function PlacesCreate() {
           {isEditing ? 'Edit' : 'Create'} Place
         </button>
       </form>
+      <button
+        className="mt-4 p-2 w-full rounded-lg bg-gray-500 text-gray-50 text-xl hover:bg-gray-400"
+        onClick={handleBackClick}
+      >
+        Back
+      </button>
+      <hr className="h-px mt-8 bg-gray-500 border-0" />
+      {isEditing && (
+        <button
+          className="mt-8 p-2 w-full rounded-lg bg-red-500 text-gray-50 text-xl hover:bg-red-400"
+          onClick={handleDeleteClick}
+        >
+          Delete
+        </button>
+      )}
     </div>
   );
 }

@@ -36,9 +36,9 @@ function PlaceInfo() {
   if (place != null) {
     renderPlaceInfo = (
       <div className="w-full">
-        <div className="mx-auto w-2/3">
+        <div className="mx-auto max-w-[960px]">
           <img
-            className="object-contain w-full max-h-[550px] min-h-80 rounded-xl bg-gray-900 text-center text-gray-100"
+            className="object-contain w-full max-h-[550px] min-h-40 rounded-xl bg-gray-900 text-center text-gray-100"
             src={place.imageName}
             alt="No Image"
           />

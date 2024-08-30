@@ -59,8 +59,10 @@ function PlacesCreate() {
       zCoordsInputRef.current.value
     );
     try {
-      const imageUrl = await uploadImage(imageInputRef.current.files[0]);
-      placeToSubmit.imageName = imageUrl;
+      if (imageInputRef.current.files[0] != undefined) {
+        const imageUrl = await uploadImage(imageInputRef.current.files[0]);
+        placeToSubmit.imageName = imageUrl;
+      }
       isEditing
         ? await editPlace(params.placeId, placeToSubmit)
         : await addNewPlace(placeToSubmit);
@@ -95,9 +97,16 @@ function PlacesCreate() {
           label="Description"
           ref={descriptionInputRef}
         />
+        <label
+          htmlFor="imageSelector"
+          className="block mt-6 text-gray-700 font-bold text-2xl"
+        >
+          Image
+        </label>
         <input
           className="mt-4 w-full rounded-lg border border-gray-300 bg-white text-gray-600 cursor-pointer file:border-none file:bg-emerald-700 file:text-gray-50 file:rounded-l-lg file:p-2 file:hover:bg-emerald-600"
           type="file"
+          id="imageSelector"
           accept="image/*"
           ref={imageInputRef}
         />

@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';
 import { deletePlace } from '../../api/deletePlace';
+import { uploadImage } from '../../api/uploadImage';
 
 function PlacesCreate() {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function PlacesCreate() {
   const xCoordsInputRef = useRef(null);
   const yCoordsInputRef = useRef(null);
   const zCoordsInputRef = useRef(null);
+  const imageInputRef = useRef(null);
 
   const isEditing = params.placeId != undefined;
 
@@ -57,6 +59,8 @@ function PlacesCreate() {
       zCoordsInputRef.current.value
     );
     try {
+      const imageUrl = await uploadImage(imageInputRef.current.files[0]);
+      placeToSubmit.imageName = imageUrl;
       isEditing
         ? await editPlace(params.placeId, placeToSubmit)
         : await addNewPlace(placeToSubmit);
@@ -90,6 +94,12 @@ function PlacesCreate() {
           type="textarea"
           label="Description"
           ref={descriptionInputRef}
+        />
+        <input
+          className="mt-4 w-full rounded-lg border border-gray-300 bg-white text-gray-600 cursor-pointer file:border-none file:bg-emerald-700 file:text-gray-50 file:rounded-l-lg file:p-2 file:hover:bg-emerald-600"
+          type="file"
+          accept="image/*"
+          ref={imageInputRef}
         />
         <fieldset>
           <legend className="block mt-6 text-gray-700 font-bold text-2xl">

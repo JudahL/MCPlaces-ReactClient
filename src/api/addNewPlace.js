@@ -1,5 +1,5 @@
 async function addNewPlace(place) {
-  const response = await fetch("https://localhost:7047/api/Place", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Place`, {
     method: 'POST',
     body: JSON.stringify(place),
     headers: {

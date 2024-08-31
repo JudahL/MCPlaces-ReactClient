@@ -1,5 +1,5 @@
 async function deletePlace(id) {
-  const response = await fetch(`https://localhost:7047/api/Place/${id}`, { method: 'DELETE' });
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Place/${id}`, { method: 'DELETE' });
   const responseData = await response.json();
 
   if (!responseData.isSuccess) {

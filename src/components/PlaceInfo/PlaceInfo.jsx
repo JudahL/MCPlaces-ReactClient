@@ -21,7 +21,7 @@ function PlaceInfo() {
     }
 
     fetchPlace();
-  }, []);
+  }, [params.placeId]);
 
   function handleBackClick() {
     navigate('/places');

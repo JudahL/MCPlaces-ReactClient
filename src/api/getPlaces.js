@@ -1,5 +1,6 @@
-async function getPlaces() {
-  const response = await fetch("https://localhost:7047/api/Place");
+async function getPlaces() {  
+  console.log(import.meta.env.VITE_API_URL);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Place`);
   const responseData = await response.json();
 
   if (!responseData.isSuccess) {

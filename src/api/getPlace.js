@@ -1,5 +1,5 @@
 async function getPlace(id) {
-  const response = await fetch(`https://localhost:7047/api/Place/${id}`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Place/${id}`);
   const responseData = await response.json();
 
   if (!responseData.isSuccess) {

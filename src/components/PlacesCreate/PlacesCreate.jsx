@@ -14,6 +14,7 @@ function PlacesCreate() {
   const params = useParams();
 
   const [place, setPlace] = useState(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
 
   const nameInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
@@ -48,6 +49,24 @@ function PlacesCreate() {
     if (place.name === '') setPlace(null);
   }
 
+  function getMainButtonContent() {
+    if (isUploadingImage) {
+      return (
+        <img
+          width="36"
+          height="36"
+          className="animate-spin mx-auto"
+          src="https://img.icons8.com/color/48/loading-sign.png"
+          alt="loading-sign"
+        />
+      );
+    } else if (isEditing) {
+      return 'Edit Place';
+    } else {
+      return 'Create Place';
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     const placeToSubmit = buildPlace(
@@ -60,14 +79,17 @@ function PlacesCreate() {
     );
     try {
       if (imageInputRef.current.files[0] != undefined) {
+        setIsUploadingImage(true);
         const imageUrl = await uploadImage(imageInputRef.current.files[0]);
         placeToSubmit.imageName = imageUrl;
       }
       isEditing
         ? await editPlace(params.placeId, placeToSubmit)
         : await addNewPlace(placeToSubmit);
+      setIsUploadingImage(false);
       navigate('/places');
     } catch (error) {
+      setIsUploadingImage(false);
       console.log(error);
     }
   }
@@ -125,7 +147,7 @@ function PlacesCreate() {
           type="submit"
           className="mt-8 p-2 w-full rounded-lg bg-emerald-700 text-gray-50 text-xl hover:bg-emerald-600"
         >
-          {isEditing ? 'Edit' : 'Create'} Place
+          {getMainButtonContent()}
         </button>
       </form>
       <button

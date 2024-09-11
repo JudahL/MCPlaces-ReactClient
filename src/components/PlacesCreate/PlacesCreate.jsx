@@ -8,13 +8,14 @@ import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';
 import { deletePlace } from '../../api/deletePlace';
 import { uploadImage } from '../../api/uploadImage';
+import { LoadingSymbol } from '../Loading/LoadingSymbol';
 
 function PlacesCreate() {
   const navigate = useNavigate();
   const params = useParams();
 
   const [place, setPlace] = useState(null);
-  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const nameInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
@@ -50,16 +51,8 @@ function PlacesCreate() {
   }
 
   function getMainButtonContent() {
-    if (isUploadingImage) {
-      return (
-        <img
-          width="36"
-          height="36"
-          className="animate-spin mx-auto"
-          src="https://img.icons8.com/color/48/loading-sign.png"
-          alt="loading-sign"
-        />
-      );
+    if (isSaving) {
+      return <LoadingSymbol text="Saving..." />;
     } else if (isEditing) {
       return 'Edit Place';
     } else {
@@ -79,17 +72,17 @@ function PlacesCreate() {
     );
     try {
       if (imageInputRef.current.files[0] != undefined) {
-        setIsUploadingImage(true);
+        setIsSaving(true);
         const imageUrl = await uploadImage(imageInputRef.current.files[0]);
         placeToSubmit.imageName = imageUrl;
       }
       isEditing
         ? await editPlace(params.placeId, placeToSubmit)
         : await addNewPlace(placeToSubmit);
-      setIsUploadingImage(false);
+      setIsSaving(false);
       navigate('/places');
     } catch (error) {
-      setIsUploadingImage(false);
+      setIsSaving(false);
       console.log(error);
     }
   }

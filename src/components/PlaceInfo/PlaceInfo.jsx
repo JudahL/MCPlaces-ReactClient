@@ -2,18 +2,23 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getPlace } from '../../api/getPlace';
 import { useEffect, useState } from 'react';
 import { ErrorDisplay } from '../Error/ErrorDisplay';
+import { LoadingContent } from '../Loading/LoadingContent';
 
 function PlaceInfo() {
   const params = useParams();
   const navigate = useNavigate();
   const [place, setPlace] = useState();
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchPlace() {
       try {
+        const timeout = setTimeout(() => setIsLoading(true), 100);
         const fetchedPlace = await getPlace(params.placeId);
         setPlace(fetchedPlace);
+        clearTimeout(timeout);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
         setError(err.message);
@@ -31,6 +36,8 @@ function PlaceInfo() {
     navigate(`/places/${params.placeId}/edit`);
   }
 
+  const renderError = <ErrorDisplay errorMessage={error} />;
+  const renderLoading = <LoadingContent text="Getting Place Data..." />;
   let renderPlaceInfo = null;
 
   if (place != null) {
@@ -72,11 +79,13 @@ function PlaceInfo() {
     );
   }
 
-  const renderError = <ErrorDisplay errorMessage={error} />;
+  if (error) {
+    return renderError;
+  } else if (isLoading) {
+    return renderLoading;
+  }
 
-  const renderFinal = error ? renderError : renderPlaceInfo;
-
-  return renderFinal;
+  return renderPlaceInfo;
 }
 
 export default PlaceInfo;

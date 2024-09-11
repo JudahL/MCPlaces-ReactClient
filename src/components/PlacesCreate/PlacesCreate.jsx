@@ -8,7 +8,7 @@ import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';
 import { deletePlace } from '../../api/deletePlace';
 import { uploadImage } from '../../api/uploadImage';
-import { LoadingSymbol } from '../Loading/LoadingSymbol';
+import { LoadingButtonContent } from '../Loading/LoadingButtonContent';
 
 function PlacesCreate() {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ function PlacesCreate() {
 
   function getMainButtonContent() {
     if (isSaving) {
-      return <LoadingSymbol text="Saving..." />;
+      return <LoadingButtonContent text="Saving..." />;
     } else if (isEditing) {
       return 'Edit Place';
     } else {

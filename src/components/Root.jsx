@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import { NavBar } from './NavBar/NavBar';
-import { LoadingSymbol } from './Loading/LoadingSymbol';
 
 function Root() {
   return (

@@ -9,10 +9,12 @@ import { editPlace } from '../../api/editPlace';
 import { deletePlace } from '../../api/deletePlace';
 import { uploadImage } from '../../api/uploadImage';
 import { LoadingButtonContent } from '../Loading/LoadingButtonContent';
+import { ImageSelectorInput } from '../Forms/ImageSelectorInput';
 
 // These are also used as Ids so should be unique
 const nameLabel = 'Name';
 const descriptionLabel = 'Description';
+const imageLabel = 'Image';
 const xCoordsLabel = 'X';
 const yCoordsLabel = 'Y';
 const zCoordsLabel = 'Z';
@@ -24,7 +26,7 @@ function PlacesCreate() {
   const [place, setPlace] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  const imageInputRef = useRef(null);
+  //const imageInputRef = useRef(null);
 
   const isEditing = params.placeId != undefined;
 
@@ -68,9 +70,11 @@ function PlacesCreate() {
     );
 
     try {
-      if (imageInputRef.current.files[0] != undefined) {
+      const imageFile = form.querySelector('input[name="Image"]').files[0];
+      if (imageFile != undefined) {
+        // TODO: Move this out of if block
         setIsSaving(true);
-        const imageUrl = await uploadImage(imageInputRef.current.files[0]);
+        const imageUrl = await uploadImage(imageFile);
         placeToSubmit.imageName = imageUrl;
       }
       isEditing
@@ -105,19 +109,7 @@ function PlacesCreate() {
       <form onSubmit={handleSubmit}>
         <FormInput type="input" label={nameLabel} isRequired />
         <FormInput type="textarea" label={descriptionLabel} />
-        <label
-          htmlFor="imageSelector"
-          className="block mt-6 text-gray-700 font-bold text-2xl"
-        >
-          Image
-        </label>
-        <input
-          className="mt-4 w-full rounded-lg border border-gray-300 bg-white text-gray-600 cursor-pointer file:border-none file:bg-emerald-700 file:text-gray-50 file:rounded-l-lg file:p-2 file:hover:bg-emerald-600"
-          type="file"
-          id="imageSelector"
-          accept="image/*"
-          ref={imageInputRef}
-        />
+        <ImageSelectorInput label={imageLabel} />
         <fieldset>
           <legend className="block mt-6 text-gray-700 font-bold text-2xl">
             Coordinates

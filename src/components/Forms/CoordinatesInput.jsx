@@ -1,4 +1,4 @@
-function CoordinatesInput({ label }) {
+function CoordinatesInput({ label, oldValue }) {
   return (
     <>
       <label htmlFor={label} className="pt-2 text-gray-700 font-bold text-xl">
@@ -9,6 +9,7 @@ function CoordinatesInput({ label }) {
         type="text"
         id={label}
         name={label}
+        defaultValue={oldValue}
       />
     </>
   );

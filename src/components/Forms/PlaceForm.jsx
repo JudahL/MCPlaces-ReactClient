@@ -53,10 +53,22 @@ function PlaceForm({ confirmText, onSave, place = emptyPlace }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormInput type="input" label={labels.name} isRequired />
-      <FormInput type="textarea" label={labels.description} />
+      <FormInput
+        type="input"
+        label={labels.name}
+        oldValue={place.name}
+        isRequired
+      />
+      <FormInput
+        type="textarea"
+        label={labels.description}
+        oldValue={place.description}
+      />
       <ImageSelectorInput label={labels.image} />
-      <CoordinatesFieldset labels={labels.coordsLabels} />
+      <CoordinatesFieldset
+        labels={labels.coordsLabels}
+        oldValues={place.coordinates}
+      />
       <hr className="h-px mt-8 bg-gray-500 border-0" />
       <button
         type="submit"

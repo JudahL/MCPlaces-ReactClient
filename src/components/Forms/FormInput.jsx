@@ -1,10 +1,11 @@
-function FormInput({ label, isRequired = false, type }) {
+function FormInput({ label, isRequired = false, type, oldValue }) {
   const inputType = (
     <input
       className="block w-full p-1 mt-2 border border-gray-300 text-xl text-emerald-800"
       type="text"
       id={label}
       name={label}
+      defaultValue={oldValue}
       required={isRequired}
     />
   );
@@ -15,6 +16,7 @@ function FormInput({ label, isRequired = false, type }) {
       type="text"
       id={label}
       name={label}
+      defaultValue={oldValue}
       required={isRequired}
     />
   );

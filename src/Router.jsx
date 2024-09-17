@@ -4,6 +4,7 @@ import { PlacesCreate } from './components/PlacesCreate/PlacesCreate';
 import { Root } from './components/Root';
 import { ServersList } from './components/ServersList/ServersList';
 import PlaceInfo from './components/PlaceInfo/PlaceInfo';
+import { PlacesEdit } from './components/PlacesEdit/PlacesEdit';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'places/:placeId/edit',
-        element: <PlacesCreate />,
+        element: <PlacesEdit />,
       },
     ],
   },

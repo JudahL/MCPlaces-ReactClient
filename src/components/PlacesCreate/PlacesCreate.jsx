@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { FormInput } from '../Forms/FormInput';
 import { addNewPlace } from '../../api/addNewPlace';
 import { buildPlace, emptyPlace } from '../../api/placeBuilder';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,18 +6,18 @@ import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';
 import { deletePlace } from '../../api/deletePlace';
 import { uploadImage } from '../../api/uploadImage';
-import { LoadingButtonContent } from '../Loading/LoadingButtonContent';
-import { ImageSelectorInput } from '../Forms/ImageSelectorInput';
-import { CoordinatesFieldset } from '../Forms/CoordinatesFieldset';
+import { PlaceForm } from '../Forms/PlaceForm';
 
 // These are also used as Ids so should be unique
-const nameLabel = 'Name';
-const descriptionLabel = 'Description';
-const imageLabel = 'Image';
-const coordsLabels = {
-  x: 'X',
-  y: 'Y',
-  z: 'Z',
+const labels = {
+  name: 'Name',
+  description: 'Description',
+  image: 'Image',
+  coordsLabels: {
+    x: 'X',
+    y: 'Y',
+    z: 'Z',
+  },
 };
 
 function PlacesCreate() {
@@ -47,16 +46,6 @@ function PlacesCreate() {
     isEditing ? fetchPlace() : null;
   }, [params.placeId, isEditing]);
 
-  function getMainButtonContent() {
-    if (isSaving) {
-      return <LoadingButtonContent text="Saving..." />;
-    } else if (isEditing) {
-      return 'Edit Place';
-    } else {
-      return 'Create Place';
-    }
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
@@ -64,11 +53,11 @@ function PlacesCreate() {
 
     const placeToSubmit = buildPlace(
       place != null ? place.id : 0,
-      formData.get(nameLabel),
-      formData.get(descriptionLabel),
-      formData.get(coordsLabels.x),
-      formData.get(coordsLabels.y),
-      formData.get(coordsLabels.z)
+      formData.get(labels.name),
+      formData.get(labels.description),
+      formData.get(labels.coordsLabels.x),
+      formData.get(labels.coordsLabels.y),
+      formData.get(labels.coordsLabels.z)
     );
 
     try {
@@ -108,19 +97,12 @@ function PlacesCreate() {
 
   return (
     <div className="max-w-96 mx-auto">
-      <form onSubmit={handleSubmit}>
-        <FormInput type="input" label={nameLabel} isRequired />
-        <FormInput type="textarea" label={descriptionLabel} />
-        <ImageSelectorInput label={imageLabel} />
-        <CoordinatesFieldset labels={coordsLabels} />
-        <hr className="h-px mt-8 bg-gray-500 border-0" />
-        <button
-          type="submit"
-          className="mt-8 p-2 w-full rounded-lg bg-emerald-700 text-gray-50 text-xl hover:bg-emerald-600"
-        >
-          {getMainButtonContent()}
-        </button>
-      </form>
+      <PlaceForm
+        onSubmit={handleSubmit}
+        labels={labels}
+        confirmText="Create Place"
+        isSaving={isSaving}
+      />
       <button
         className="mt-4 p-2 w-full rounded-lg bg-gray-500 text-gray-50 text-xl hover:bg-gray-400"
         onClick={handleBackClick}

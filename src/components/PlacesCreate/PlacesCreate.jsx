@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { FormInput } from '../Forms/FormInput';
-import { CoordinatesInput } from '../Forms/CoordinatesInput';
 import { addNewPlace } from '../../api/addNewPlace';
 import { buildPlace, emptyPlace } from '../../api/placeBuilder';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,14 +9,17 @@ import { deletePlace } from '../../api/deletePlace';
 import { uploadImage } from '../../api/uploadImage';
 import { LoadingButtonContent } from '../Loading/LoadingButtonContent';
 import { ImageSelectorInput } from '../Forms/ImageSelectorInput';
+import { CoordinatesFieldset } from '../Forms/CoordinatesFieldset';
 
 // These are also used as Ids so should be unique
 const nameLabel = 'Name';
 const descriptionLabel = 'Description';
 const imageLabel = 'Image';
-const xCoordsLabel = 'X';
-const yCoordsLabel = 'Y';
-const zCoordsLabel = 'Z';
+const coordsLabels = {
+  x: 'X',
+  y: 'Y',
+  z: 'Z',
+};
 
 function PlacesCreate() {
   const navigate = useNavigate();
@@ -64,9 +66,9 @@ function PlacesCreate() {
       place != null ? place.id : 0,
       formData.get(nameLabel),
       formData.get(descriptionLabel),
-      formData.get(xCoordsLabel),
-      formData.get(yCoordsLabel),
-      formData.get(zCoordsLabel)
+      formData.get(coordsLabels.x),
+      formData.get(coordsLabels.y),
+      formData.get(coordsLabels.z)
     );
 
     try {
@@ -110,16 +112,7 @@ function PlacesCreate() {
         <FormInput type="input" label={nameLabel} isRequired />
         <FormInput type="textarea" label={descriptionLabel} />
         <ImageSelectorInput label={imageLabel} />
-        <fieldset>
-          <legend className="block mt-6 text-gray-700 font-bold text-2xl">
-            Coordinates
-          </legend>
-          <div className="flex items-center gap-4">
-            <CoordinatesInput label={xCoordsLabel} />
-            <CoordinatesInput label={yCoordsLabel} />
-            <CoordinatesInput label={zCoordsLabel} />
-          </div>
-        </fieldset>
+        <CoordinatesFieldset labels={coordsLabels} />
         <hr className="h-px mt-8 bg-gray-500 border-0" />
         <button
           type="submit"

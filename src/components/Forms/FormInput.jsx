@@ -1,13 +1,10 @@
-import { forwardRef } from 'react';
-
-const FormInput = forwardRef(({ label, isRequired = false, type }, ref) => {
+function FormInput({ label, isRequired = false, type }) {
   const inputType = (
     <input
       className="block w-full p-1 mt-2 border border-gray-300 text-xl text-emerald-800"
       type="text"
       id={label}
       name={label}
-      ref={ref}
       required={isRequired}
     />
   );
@@ -18,7 +15,6 @@ const FormInput = forwardRef(({ label, isRequired = false, type }, ref) => {
       type="text"
       id={label}
       name={label}
-      ref={ref}
       required={isRequired}
     />
   );
@@ -45,8 +41,6 @@ const FormInput = forwardRef(({ label, isRequired = false, type }, ref) => {
       {renderInput()}
     </>
   );
-});
-
-FormInput.displayName = 'FormInput';
+}
 
 export { FormInput };

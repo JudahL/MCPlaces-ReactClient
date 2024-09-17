@@ -10,6 +10,13 @@ import { deletePlace } from '../../api/deletePlace';
 import { uploadImage } from '../../api/uploadImage';
 import { LoadingButtonContent } from '../Loading/LoadingButtonContent';
 
+// These are also used as Ids so should be unique
+const nameLabel = 'Name';
+const descriptionLabel = 'Description';
+const xCoordsLabel = 'X';
+const yCoordsLabel = 'Y';
+const zCoordsLabel = 'Z';
+
 function PlacesCreate() {
   const navigate = useNavigate();
   const params = useParams();
@@ -17,11 +24,6 @@ function PlacesCreate() {
   const [place, setPlace] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  const nameInputRef = useRef(null);
-  const descriptionInputRef = useRef(null);
-  const xCoordsInputRef = useRef(null);
-  const yCoordsInputRef = useRef(null);
-  const zCoordsInputRef = useRef(null);
   const imageInputRef = useRef(null);
 
   const isEditing = params.placeId != undefined;
@@ -31,24 +33,15 @@ function PlacesCreate() {
       try {
         const fetchedPlace = await getPlace(params.placeId);
         setPlace(fetchedPlace);
-        updateRefs(fetchedPlace);
+        // TODO: Set Input Values
       } catch (err) {
         console.log(err);
         //setError(err.message);
       }
     }
 
-    isEditing ? fetchPlace() : updateRefs();
+    isEditing ? fetchPlace() : null;
   }, [params.placeId, isEditing]);
-
-  function updateRefs(place = emptyPlace) {
-    nameInputRef.current.value = place.name;
-    descriptionInputRef.current.value = place.description;
-    xCoordsInputRef.current.value = place.coordinates.x;
-    yCoordsInputRef.current.value = place.coordinates.y;
-    zCoordsInputRef.current.value = place.coordinates.z;
-    if (place.name === '') setPlace(null);
-  }
 
   function getMainButtonContent() {
     if (isSaving) {
@@ -62,21 +55,18 @@ function PlacesCreate() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    //Testing:
     const form = event.target;
     const formData = new FormData(form);
-    console.log(formData);
-    console.log(formData.get('Name'));
-    return;
-    // ^^^ Remove code above after testing ^^^
+
     const placeToSubmit = buildPlace(
       place != null ? place.id : 0,
-      nameInputRef.current.value,
-      descriptionInputRef.current.value,
-      xCoordsInputRef.current.value,
-      yCoordsInputRef.current.value,
-      zCoordsInputRef.current.value
+      formData.get(nameLabel),
+      formData.get(descriptionLabel),
+      formData.get(xCoordsLabel),
+      formData.get(yCoordsLabel),
+      formData.get(zCoordsLabel)
     );
+
     try {
       if (imageInputRef.current.files[0] != undefined) {
         setIsSaving(true);
@@ -113,12 +103,8 @@ function PlacesCreate() {
   return (
     <div className="max-w-96 mx-auto">
       <form onSubmit={handleSubmit}>
-        <FormInput type="input" label="Name" isRequired ref={nameInputRef} />
-        <FormInput
-          type="textarea"
-          label="Description"
-          ref={descriptionInputRef}
-        />
+        <FormInput type="input" label={nameLabel} isRequired />
+        <FormInput type="textarea" label={descriptionLabel} />
         <label
           htmlFor="imageSelector"
           className="block mt-6 text-gray-700 font-bold text-2xl"
@@ -137,9 +123,9 @@ function PlacesCreate() {
             Coordinates
           </legend>
           <div className="flex items-center gap-4">
-            <CoordinatesInput label="X" ref={xCoordsInputRef} />
-            <CoordinatesInput label="Y" ref={yCoordsInputRef} />
-            <CoordinatesInput label="Z" ref={zCoordsInputRef} />
+            <CoordinatesInput label={xCoordsLabel} />
+            <CoordinatesInput label={yCoordsLabel} />
+            <CoordinatesInput label={zCoordsLabel} />
           </div>
         </fieldset>
         <hr className="h-px mt-8 bg-gray-500 border-0" />

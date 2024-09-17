@@ -6,6 +6,7 @@ const FormInput = forwardRef(({ label, isRequired = false, type }, ref) => {
       className="block w-full p-1 mt-2 border border-gray-300 text-xl text-emerald-800"
       type="text"
       id={label}
+      name={label}
       ref={ref}
       required={isRequired}
     />
@@ -16,6 +17,7 @@ const FormInput = forwardRef(({ label, isRequired = false, type }, ref) => {
       className="block w-full p-1 mt-2 border border-gray-300 text-md text-emerald-800"
       type="text"
       id={label}
+      name={label}
       ref={ref}
       required={isRequired}
     />

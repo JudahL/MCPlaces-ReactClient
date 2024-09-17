@@ -11,6 +11,7 @@ const CoordinatesInput = forwardRef(({ label }, ref) => {
         type="text"
         ref={ref}
         id={label}
+        name={label}
       />
     </>
   );

@@ -62,6 +62,13 @@ function PlacesCreate() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    //Testing:
+    const form = event.target;
+    const formData = new FormData(form);
+    console.log(formData);
+    console.log(formData.get('Name'));
+    return;
+    // ^^^ Remove code above after testing ^^^
     const placeToSubmit = buildPlace(
       place != null ? place.id : 0,
       nameInputRef.current.value,

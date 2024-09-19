@@ -2,6 +2,7 @@ import { addNewPlace } from '../../api/addNewPlace';
 import { useNavigate } from 'react-router-dom';
 import { PlaceForm } from '../Forms/PlaceForm';
 import { placesFormLabels as labels } from '../Forms/PlacesFormLabels';
+import { BasicButton } from '../Buttons/BasicButton';
 
 function PlacesCreate() {
   const navigate = useNavigate();
@@ -17,12 +18,13 @@ function PlacesCreate() {
   return (
     <div className="max-w-96 mx-auto">
       <PlaceForm labels={labels} confirmText="Create Place" onSave={onSave} />
-      <button
-        className="mt-4 p-2 w-full rounded-lg bg-gray-500 text-gray-50 text-xl hover:bg-gray-400"
+      <BasicButton
         onClick={handleBackClick}
+        colour="subdued"
+        marginTop="medium"
       >
         Back
-      </button>
+      </BasicButton>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { getPlace } from '../../api/getPlace';
 import { useEffect, useState } from 'react';
 import { ErrorDisplay } from '../Error/ErrorDisplay';
 import { LoadingContent } from '../Loading/LoadingContent';
+import { BasicButton } from '../Buttons/BasicButton';
 
 function PlaceInfo() {
   const params = useParams();
@@ -61,18 +62,12 @@ function PlaceInfo() {
           </div>
           <hr className="h-px mt-8 bg-gray-500 border-0" />
           <div className="mt-8 flex justify-between gap-8">
-            <button
-              className="p-2 w-full rounded-lg bg-gray-500 text-gray-50 text-xl hover:bg-gray-400"
-              onClick={handleBackClick}
-            >
+            <BasicButton onClick={handleBackClick} colour="subdued">
               Back
-            </button>
-            <button
-              className="p-2 w-full rounded-lg bg-emerald-700 text-gray-50 text-xl hover:bg-emerald-600"
-              onClick={handleEditClick}
-            >
+            </BasicButton>
+            <BasicButton onClick={handleEditClick} colour="primary">
               Edit
-            </button>
+            </BasicButton>
           </div>
         </div>
       </div>

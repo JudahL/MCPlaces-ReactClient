@@ -8,6 +8,7 @@ import { emptyPlace } from '../../api/buildPlace';
 import { useNavigate } from 'react-router-dom';
 import { uploadImage } from '../../api/uploadImage';
 import { buildPlaceWithFormData } from '../../api/buildPlaceWithFormData';
+import { BasicButton } from '../Buttons/BasicButton';
 
 function PlaceForm({ confirmText, onSave, place = emptyPlace }) {
   const navigate = useNavigate();
@@ -64,13 +65,10 @@ function PlaceForm({ confirmText, onSave, place = emptyPlace }) {
         labels={labels.coordsLabels}
         oldValues={place.coordinates}
       />
-      <hr className="h-px mt-8 bg-gray-500 border-0" />
-      <button
-        type="submit"
-        className="mt-8 p-2 w-full rounded-lg bg-emerald-700 text-gray-50 text-xl hover:bg-emerald-600"
-      >
+      <hr className="h-px mt-8 mb-8 bg-gray-500 border-0" />
+      <BasicButton type="submit" colour="primary">
         {getConfirmButtonContent()}
-      </button>
+      </BasicButton>
     </form>
   );
 }

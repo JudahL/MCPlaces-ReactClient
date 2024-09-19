@@ -5,6 +5,7 @@ import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';
 import { deletePlace } from '../../api/deletePlace';
 import { PlaceForm } from '../Forms/PlaceForm';
+import { BasicButton } from '../Buttons/BasicButton';
 
 function PlacesEdit() {
   const navigate = useNavigate();
@@ -52,19 +53,17 @@ function PlacesEdit() {
   return (
     <div className="max-w-96 mx-auto">
       <PlaceForm confirmText="Edit Place" onSave={handleSave} place={place} />
-      <button
-        className="mt-4 p-2 w-full rounded-lg bg-gray-500 text-gray-50 text-xl hover:bg-gray-400"
+      <BasicButton
         onClick={handleBackClick}
+        colour="subdued"
+        marginTop="medium"
       >
         Back
-      </button>
-      <hr className="h-px mt-8 bg-gray-500 border-0" />
-      <button
-        className="mt-8 p-2 w-full rounded-lg bg-red-500 text-gray-50 text-xl hover:bg-red-400"
-        onClick={handleDeleteClick}
-      >
+      </BasicButton>
+      <hr className="h-px mt-8 mb-8 bg-gray-500 border-0" />
+      <BasicButton onClick={handleDeleteClick} colour="warning">
         Delete
-      </button>
+      </BasicButton>
     </div>
   );
 }

@@ -4,9 +4,10 @@ import { CoordinatesFieldset } from './CoordinatesFieldset';
 import { FormInput } from './FormInput';
 import { ImageSelectorInput } from './ImageSelectorInput';
 import { placesFormLabels as labels } from './PlacesFormLabels';
-import { buildPlace, emptyPlace } from '../../api/placeBuilder';
+import { emptyPlace } from '../../api/buildPlace';
 import { useNavigate } from 'react-router-dom';
 import { uploadImage } from '../../api/uploadImage';
+import { buildPlaceWithFormData } from '../../api/buildPlaceWithFormData';
 
 function PlaceForm({ confirmText, onSave, place = emptyPlace }) {
   const navigate = useNavigate();
@@ -17,15 +18,7 @@ function PlaceForm({ confirmText, onSave, place = emptyPlace }) {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
-
-    const placeToSubmit = buildPlace(
-      place.id,
-      formData.get(labels.name),
-      formData.get(labels.description),
-      formData.get(labels.coordsLabels.x),
-      formData.get(labels.coordsLabels.y),
-      formData.get(labels.coordsLabels.z)
-    );
+    const placeToSubmit = buildPlaceWithFormData(place.id, formData);
 
     try {
       setIsSaving(true);

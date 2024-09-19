@@ -26,6 +26,8 @@ function PlaceForm({ confirmText, onSave, place = emptyPlace }) {
       if (imageFile != undefined) {
         const imageUrl = await uploadImage(imageFile);
         placeToSubmit.imageName = imageUrl;
+      } else {
+        placeToSubmit.imageName = place.imageName;
       }
       await onSave(placeToSubmit);
       setIsSaving(false);

@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import { addNewPlace } from '../../api/addNewPlace';
-import { buildPlace } from '../../api/buildPlace';
 import { useNavigate } from 'react-router-dom';
-import { uploadImage } from '../../api/uploadImage';
 import { PlaceForm } from '../Forms/PlaceForm';
 import { placesFormLabels as labels } from '../Forms/PlacesFormLabels';
 

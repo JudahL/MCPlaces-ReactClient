@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { buildPlace, emptyPlace } from '../../api/buildPlace';
+import { emptyPlace } from '../../api/buildPlace';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPlace } from '../../api/getPlace';
 import { editPlace } from '../../api/editPlace';

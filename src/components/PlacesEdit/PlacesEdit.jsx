@@ -13,14 +13,11 @@ function PlacesEdit() {
 
   const [place, setPlace] = useState(emptyPlace);
 
-  //const imageInputRef = useRef(null);
-
   useEffect(() => {
     async function fetchPlace() {
       try {
         const fetchedPlace = await getPlace(params.placeId);
         setPlace(fetchedPlace);
-        // TODO: Set Input Values
       } catch (err) {
         console.log(err);
         //setError(err.message);

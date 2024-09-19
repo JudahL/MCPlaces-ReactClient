@@ -1,7 +1,7 @@
 import { placesFormLabels as labels } from "../components/Forms/PlacesFormLabels";
 import { buildPlace } from "./buildPlace";
 
-function buildPlaceWithForm(id, formData) {
+function buildPlaceWithFormData(id, formData) {
   return buildPlace(
     id,
     formData.get(labels.name),
@@ -12,4 +12,4 @@ function buildPlaceWithForm(id, formData) {
   );
 }
 
-export { buildPlaceWithForm };
+export { buildPlaceWithFormData };

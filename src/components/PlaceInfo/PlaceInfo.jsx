@@ -43,32 +43,31 @@ function PlaceInfo() {
 
   if (place != null) {
     renderPlaceInfo = (
-      <div className="w-full">
-        <div className="mx-auto max-w-[960px]">
-          <img
-            className="object-contain w-full max-h-[550px] min-h-40 rounded-xl bg-gray-900 text-center text-gray-100"
-            src={place.imageName}
-            alt="No Image"
-          />
-          <div className="flex justify-between">
-            <div>
-              <h2 className="text-2xl text-gray-700 font-bold">{place.name}</h2>
-              <p className="text-lg text-gray-600">{place.description}</p>
-            </div>
-            <div>
-              <h3 className="text-xl text-gray-700 font-bold">Coordinates</h3>
-              <p className="text-lg text-gray-600">{`X:${place.coordinates.x}, Y:${place.coordinates.y}, Z:${place.coordinates.z}`}</p>
-            </div>
-          </div>
-          <hr className="h-px mt-8 bg-gray-500 border-0" />
-          <div className="mt-8 flex justify-between gap-8">
-            <BasicButton onClick={handleBackClick} colour="subdued">
-              Back
-            </BasicButton>
-            <BasicButton onClick={handleEditClick} colour="primary">
-              Edit
-            </BasicButton>
-          </div>
+      <div className="mx-auto max-w-[960px]">
+        <img
+          className="object-contain w-full max-h-[550px] min-h-40 rounded-xl bg-gray-900 text-center text-gray-100"
+          src={place.imageName}
+          alt="No Image"
+        />
+        <div className="flex justify-between">
+          <h2 className="text-xl lg:text-2xl text-gray-700 font-bold">
+            {place.name}
+          </h2>
+          <p className="text-md lg:text-lg text-center text-gray-600">{`X:${place.coordinates.x}, Y:${place.coordinates.y}, Z:${place.coordinates.z}`}</p>
+        </div>
+        <div>
+          <p className="text-md lg:text-lg text-gray-600">
+            {place.description}
+          </p>
+        </div>
+        <hr className="h-px my-4 lg:my-6 bg-gray-500 border-0" />
+        <div className="ml-auto sm:w-[400px] flex justify-between gap-2">
+          <BasicButton onClick={handleBackClick} colour="subdued">
+            Back
+          </BasicButton>
+          <BasicButton onClick={handleEditClick} colour="primary">
+            Edit
+          </BasicButton>
         </div>
       </div>
     );

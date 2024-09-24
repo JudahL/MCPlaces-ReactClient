@@ -15,10 +15,10 @@ function PlaceCard({ place }) {
         alt="No Image"
       />
       <div className="mt-2 flex justify-between">
-        <h3 className="text-gray-950 text-md font-main font-[500] hover:text-red-500">
+        <h3 className="text-gray-950 text-md font-[500] hover:text-red-500">
           {place.name}
         </h3>
-        <p className="text-gray-700 text-sm font-main font-[300]">
+        <p className="text-gray-700 text-sm font-[300]">
           {`x:${place.coordinates.x} z:${place.coordinates.z}`}
         </p>
       </div>

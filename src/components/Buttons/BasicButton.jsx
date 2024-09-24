@@ -1,4 +1,4 @@
-const baseStyling = 'p-2 w-full rounded-lg text-xl';
+const baseStyling = 'font-button p-2 w-full rounded-lg text-xl';
 
 //Ensure that all styles start with a space
 const buttonColourStyles = {
